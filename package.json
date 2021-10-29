@@ -5,7 +5,7 @@
   "main": "server.ts",
   "repository": "https://github.com/roast-cms/link-tool.git",
   "author": "dmitrizzle <8587882+dmitrizzle@users.noreply.github.com>",
-  "license": "Apache License 2.0",
+  "license": "MIT",
   "private": false,
   "scripts": {
     "start": "ts-node ./server.ts",
