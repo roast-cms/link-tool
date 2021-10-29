@@ -2,7 +2,7 @@
 
 > A Node.js API for managing affiliate links.
 
-This project creates an API service which will return a link (most likely a URL) in response to a key (could be another url) and parametres (like locale). You can use the returned URL to either create redirects (link cloaking) or to simply manage links the HTML of your blog, website, or a tool. This tools is currently in development -- see [releases](https://github.com/roast-cms/link-tool/releases).
+This project creates an API service which will return a link (most likely a URL) in response to a key (could be another url) and parameters (like locale). You can use the returned URL to either create redirects (link cloaking) or to simply manage links the HTML of your blog, website, or a tool. This tools is currently in development -- see [releases](https://github.com/roast-cms/link-tool/releases).
 
 ## API:
 
@@ -59,11 +59,11 @@ export const MyPage = () => {
 
 ## Installation:
 
-You will need to run a Node.js server and a MongoDB server to manage your links. You will need to manage your links using the pattern described in the API docs (above). You will not have to run a separate Node.js server if you already have one -- this app can be added to your `server.js` file (or similar) to work with an `Express.js` router.
+You will need to run a Node.js server and a MongoDB server with Redis caching server to manage your links. You will need to manage your links using the pattern described in the API docs (above). You will not have to run a separate Node.js server if you already have one -- this app can be added to your `server.js` file (or similar) to work with an `Express.js` router.
 
 ## To Do:
 
-- [ ] Initialize project in Node.js with Mongoose (MongoDB)
-- [ ] TypeScript and Jest
+- [x] Initialize project in Node.js with Mongoose (MongoDB)
+- [x] TypeScript and Jest
 - [ ] Add locale selection logic
 - [ ] Allow link disabling/archiving
