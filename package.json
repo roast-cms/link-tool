@@ -1,0 +1,50 @@
+{
+  "name": "link-tool",
+  "version": "0.0.1",
+  "description": "A Node.js API for managing links",
+  "main": "server.ts",
+  "repository": "https://github.com/roast-cms/link-tool.git",
+  "author": "dmitrizzle <8587882+dmitrizzle@users.noreply.github.com>",
+  "license": "Apache License 2.0",
+  "private": false,
+  "scripts": {
+    "start": "ts-node ./server.ts",
+    "start:heroku": "node -r ts-node/register ./server.ts",
+    "dev": "tsc-watch --onSuccess \"ts-node ./server.ts\"",
+    "lint": "eslint \"./**/*.ts\"",
+    "lint:fix": "eslint --fix \"./**/*.ts\"",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.3.1",
+    "mongoose": "^6.0.12",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.11",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^8.1.0",
+    "husky": "^7.0.4",
+    "tsc-watch": "^4.2.9"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts)?$": "babel-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.[t]s?(x)",
+      "**/?(*.)+(spec|test).[t]s?(x)"
+    ]
+  }
+}
