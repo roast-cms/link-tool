@@ -42,7 +42,7 @@ node_modules/
 jspm_packages/
 
 # TypeScript JS file output
-app/*.js
+*.js
 
 # TypeScript v1 declaration files
 typings/
