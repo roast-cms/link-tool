@@ -4,13 +4,15 @@ import connection from "../utils/mongoose";
 const Schema = mongoose.Schema;
 
 const linkSchema = new Schema({
-  key: String,
-  links: [
+  link: String,
+  vendors: [
     {
-      link: String,
+      url: String,
+      locale: String,
+      value: Number,
     },
   ],
 });
 
-const Link = connection.model("Link", linkSchema);
-export default Link;
+const Links = connection.model("Link", linkSchema);
+export default Links;

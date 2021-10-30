@@ -59,7 +59,9 @@ export const MyPage = () => {
 
 ## Installation:
 
-You will need to run a Node.js server and a MongoDB server with Redis caching server to manage your links. You will need to manage your links using the pattern described in the API docs (above). You will not have to run a separate Node.js server if you already have one -- this app can be added to your `server.js` file (or similar) to work with an `Express.js` router.
+After you've installed [MongoDB](https://docs.mongodb.com/guides/server/install/) (I recommend you also install [MongoDB Compass](https://www.mongodb.com/products/compass)) and [Redis](https://www.javaniceday.com/post/install-and-run-redis-locally) on your machine, create `.env` file in the root of this project folder and use `.env.example` as a template. For `APPLICATION_SECRET`, you'll need to create your own string of random numbers/letters (make sure to add your `.env` to `.gitignore` and not to share it publicly).
+
+Then you can `yarn dev` to run the sample server.
 
 ## To Do:
 
