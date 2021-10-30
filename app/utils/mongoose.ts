@@ -1,14 +1,17 @@
 import * as mongoose from "mongoose";
 import * as cachegoose from "cachegoose";
-import redis from "./redis";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 try {
   (async () => {
+    const redis = await require("./redis");
     cachegoose(mongoose, {
       engine: "redis",
-      port: redis.options.port,
-      host: redis.options.host,
-      password: redis.options.password,
+      port: redis.default.options.port,
+      host: redis.default.options.host,
+      password: redis.default.options.password,
     });
   })();
 } catch (error) {

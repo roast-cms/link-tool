@@ -1,7 +1,11 @@
-import { promisify } from "util";
 import * as redis from "redis";
+import * as dotenv from "dotenv";
+import * as bluebird from "bluebird";
+
+dotenv.config();
 
 const client = redis.createClient({ url: process.env.REDIS_URL });
-const asyncRedis = promisify(client.get).bind(client);
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 
-export default asyncRedis;
+export default client;

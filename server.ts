@@ -2,9 +2,6 @@ import * as express from "express";
 import * as dotenv from "dotenv";
 import tool from "./app";
 
-/**
-  `dotenv` is used to acces `.env` file for database connection keys.
-*/
 dotenv.config();
 
 /**

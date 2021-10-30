@@ -4,11 +4,9 @@ import * as session from "express-session";
 import * as connectRedis from "connect-redis";
 import * as dotenv from "dotenv";
 
+import Link from "./models/link";
 import { Request, Response } from "express";
 
-/**
-  `dotenv` is used to acces `.env` file for database connection keys.
-*/
 dotenv.config();
 
 const expressApp = express();
@@ -36,10 +34,14 @@ const tool = ({ pathName }: { pathName: string }) =>
   expressApp.get(
     `${pathName || "/recommends"}/:key`,
     async (req: Request, res: Response) => {
+      const key = req.params.key;
+      const link = await Link.findOne({ key }).exec();
+      console.log("link", link);
+
       return res.json({
         status: "ok",
-        key: req.params.key,
-        link: "",
+        key,
+        link,
       });
     }
   );
