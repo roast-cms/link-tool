@@ -14,7 +14,17 @@ const app = express();
 */
 app.use(
   linkTool({
-    pathName: "/recommends", // path name for the `link-tool` API on local Express router
+    // REQUIRED redis server URL
+    redisURL: process.env.REDIS_URL,
+
+    // REQUIRED MongoDB URI
+    databaseURI: process.env.DATABASE_URI,
+
+    // REQUIRED application secret (random string for app session ID)
+    applicationSecret: process.env.APPLICATION_SECRET,
+
+    // OPTIONAL path name for the `link-tool` API on local Express router
+    pathName: "/recommends",
   })
 );
 

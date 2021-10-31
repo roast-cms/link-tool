@@ -3,41 +3,56 @@ import * as express from "express";
 import * as redis from "redis";
 import * as session from "express-session";
 import * as connectRedis from "connect-redis";
-import * as dotenv from "dotenv";
 
 import Links from "./models/links";
 import { Request, Response } from "express";
 
-dotenv.config();
-
-const expressApp = express();
-const RedisStore = connectRedis(session);
-const redisClient = redis.createClient({
-  url: process.env.REDIS_URL,
-});
-
 /**
-  Set up Redis connection.
+  Returns Express router middleware.
 */
-expressApp.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    secret: process.env.APPLICATION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+const tool = ({
+  pathName,
+  redisURL,
+  databaseURI,
+  applicationSecret,
+}: {
+  pathName: string | undefined;
+  redisURL: string;
+  databaseURI: string;
+  applicationSecret: string;
+}) => {
+  if (!redisURL || !databaseURI || !applicationSecret)
+    throw {
+      error:
+        "Required `redisURL`, `databaseURI`, or `applicationSecret` missing.",
+    };
 
-/**
-  Plug in to Express router.
-*/
-const tool = ({ pathName }: { pathName: string }) =>
-  expressApp.get(
+  // set up Redis connection.
+  const expressApp = express();
+  const RedisStore = connectRedis(session);
+  const redisClient = redis.createClient({
+    url: redisURL,
+  });
+  expressApp.use(
+    session({
+      store: new RedisStore({ client: redisClient }),
+      secret: applicationSecret,
+      resave: false,
+      saveUninitialized: false,
+    })
+  );
+
+  return expressApp.get(
     `${pathName || "/recommends"}/:link`,
     async (req: Request, res: Response) => {
       // query
       const linkID = req.params.link;
-      const dbDocument = await Links.findOne({ link: linkID }).exec();
+      const dbDocument = await Links({
+        databaseURI,
+        redisURL,
+      })
+        .findOne({ link: linkID })
+        .exec();
 
       // document not found
       if (!dbDocument || !dbDocument._doc)
@@ -71,5 +86,6 @@ const tool = ({ pathName }: { pathName: string }) =>
       });
     }
   );
+};
 
 export default tool;

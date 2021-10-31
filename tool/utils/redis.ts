@@ -1,11 +1,10 @@
 import * as redis from "redis";
-import * as dotenv from "dotenv";
 import * as bluebird from "bluebird";
 
-dotenv.config();
+export const createRedisClient = async ({ redisURL }: { redisURL: string }) => {
+  const client = redis.createClient({ url: redisURL });
+  bluebird.promisifyAll(redis.RedisClient.prototype);
+  bluebird.promisifyAll(redis.Multi.prototype);
 
-const client = redis.createClient({ url: process.env.REDIS_URL });
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
-
-export default client;
+  return client;
+};
