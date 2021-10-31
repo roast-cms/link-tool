@@ -1223,6 +1223,22 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@roast-cms/link-tool@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@roast-cms/link-tool/-/link-tool-0.0.2.tgz#1541dc50eb45f1ebf9af72772f8841a5b5cb37b6"
+  integrity sha512-bJ10RwxjzaFv0jOGpPKC/GZF4PrFfmuoxpIGM/eXlP02DBS6cjWitzkdiCeA6xuFjPQDpXqSjY43YbQsXsbUcA==
+  dependencies:
+    bluebird "^3.7.2"
+    cachegoose "^8.0.0"
+    connect-redis "^6.0.0"
+    express "^4.17.1"
+    express-session "^1.17.2"
+    jest "^27.3.1"
+    mongoose "^6.0.12"
+    redis "^3.1.2"
+    ts-node "^10.4.0"
+    typescript "^4.4.4"
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.3.tgz#3802ddd21a50a949b6721ddd72da36e67e7f1b2d"
