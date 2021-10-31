@@ -1,8 +1,7 @@
-// @ts-nocheck
-import * as express from "express";
-import * as redis from "redis";
-import * as session from "express-session";
-import * as connectRedis from "connect-redis";
+const express = require("express");
+const redis = require("redis");
+const session = require("express-session");
+const connectRedis = require("connect-redis");
 
 import Links from "./models/links";
 import { Request, Response } from "express";
