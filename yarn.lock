@@ -1223,10 +1223,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@roast-cms/link-tool@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@roast-cms/link-tool/-/link-tool-0.0.5.tgz#5a30af2e74599d12614deb88e646084d742bc1f3"
-  integrity sha512-vwfAstbwvxJnyRhaej1QPo2xp65sp0hu3M9ZnRY8sphi+rBDQluAIFkGD+jZfDTnUwd/c5kKhW8Nz+/XNkf/ng==
+"@roast-cms/links@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@roast-cms/links/-/links-0.0.6.tgz#8c9eab1704ec1326afadb0f8758a50f083352874"
+  integrity sha512-eeOthGAea9WtjzfvDXdvffYG+CfF//3BQih2pX4reupWb+2y/4pav22fh/tAYtN7zwJKUuwwfFnR5kLuJoyHOg==
   dependencies:
     bluebird "^3.7.2"
     cachegoose "^8.0.0"

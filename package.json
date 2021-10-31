@@ -1,9 +1,9 @@
 {
-  "name": "@roast-cms/link-tool",
+  "name": "@roast-cms/links",
   "version": "0.0.6",
   "description": "A Node.js API for managing affiliate links.",
   "main": "dist/index.js",
-  "repository": "https://github.com/roast-cms/link-tool.git",
+  "repository": "https://github.com/roast-cms/links.git",
   "author": "dmitrizzle <8587882+dmitrizzle@users.noreply.github.com>",
   "license": "MIT",
   "private": false,
@@ -13,12 +13,12 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "dev": "tsc-watch --onSuccess \"ts-node ./dev-server\"",
+    "dev:example": "tsc-watch --onSuccess \"ts-node ./example-server\"",
     "lint": "eslint \"./**/*.ts\"",
     "lint:fix": "eslint --fix \"./**/*.ts\"",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
-    "prepare": "husky install",
-    "prepublish": "yarn build"
+    "prepare": "husky install && yarn build"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
-    "@roast-cms/link-tool": "^0.0.5",
+    "@roast-cms/links": "^0.0.6",
     "@types/bluebird": "^3.5.36",
     "@types/body-parser": "^1.19.0",
     "@types/connect-redis": "^0.0.17",
