@@ -6,23 +6,24 @@ This project creates an API service which will return a link (most likely a URL)
 
 ## API:
 
-#### GET `/recommends/widget?locale=usa`
+#### GET `/recommends/widget?locale=us`
 
 ```json
 {
-  "link": "https://shop.com/usa/widget?referral=you"
+  "link": "https://shop.com/us/widget?referral=you"
 }
 ```
 
-For this example to work, MongoDB collection `links` should have the following document:
+For this example to work, MongoDB collection `links` should have the following document (`vendors[].locale` is optional):
 
 ```json
 {
-  "key": "widget",
-  "links": [
+  "link": "widget",
+  "vendors": [
     {
-      "link": "https://shop.com/usa/widget?referral=you",
-      "locale": "usa"
+      "url": "https://shop.com/us/widget?referral=you",
+      "value": 1,
+      "locale": "us"
     }
   ]
 }
@@ -32,7 +33,7 @@ For this example to work, MongoDB collection `links` should have the following d
 
 This an example using React framework, however, the idea would be the same in any kind of project (both on server and on the browser):
 
-1. Make an XHR (or fetch) request to `link-tool` service with the key (must be a short string) as a URL path and any parameters sent as a query.
+1. Make an XHR (or fetch) request to `link-tool` service with the key (must be a string) as a URL path and any parameters sent as a query.
 2. Wait for response.
 3. Use the response to create link in the returned HTML (though this could be any language your app is built in).
 
@@ -44,7 +45,7 @@ export const MyPage = () => {
   // send fetch request on page load and update state
   useEffect(() => {
     try {
-      const linkResponse = await fetch("/recommends/widget?locale=usa");
+      const linkResponse = await fetch("/recommends/widget?locale=us");
       const linkResponseJson = await linkResponse.json();
       setMyLink(linkResponseJson.link);
     } catch(error) {

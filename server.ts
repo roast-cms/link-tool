@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
-import tool from "./app";
+import linkTool from "./tool";
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ const app = express();
   This is the `link-tool` implementation.
 */
 app.use(
-  tool({
+  linkTool({
     pathName: "/recommends", // path name for the `link-tool` API on local Express router
   })
 );
