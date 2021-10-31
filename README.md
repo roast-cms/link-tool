@@ -1,6 +1,6 @@
 # `links`
 
-> A Node.js middleware for managing affiliate links.
+> An Express.js server middleware for managing affiliate links.
 
 This project creates an API service which will return a link URL in response to a keyword (or another URL) and parameters (like locale). You can use the returned URL to either create redirects (link cloaking) or to simply manage links the HTML of your blog, website, or a tool.
 
