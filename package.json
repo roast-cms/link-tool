@@ -1,6 +1,6 @@
 {
   "name": "@roast-cms/link-tool",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Node.js API for managing affiliate links.",
   "main": "tool/index.js",
   "repository": "https://github.com/roast-cms/link-tool.git",
