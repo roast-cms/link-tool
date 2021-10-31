@@ -1,8 +1,8 @@
 {
-  "name": "link-tool",
+  "name": "@roast-cms/link-tool",
   "version": "0.0.1",
-  "description": "A Node.js API for managing links",
-  "main": "./tool/index.js",
+  "description": "A Node.js API for managing affiliate links.",
+  "main": "tool/index.js",
   "repository": "https://github.com/roast-cms/link-tool.git",
   "author": "dmitrizzle <8587882+dmitrizzle@users.noreply.github.com>",
   "license": "MIT",
