@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const connection = require("../utils/mongoose");
+import * as mongoose from "mongoose";
+import connection from "../utils/mongoose";
 
 const Schema = mongoose.Schema;
 

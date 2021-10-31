@@ -1,5 +1,5 @@
-const redis = require("redis");
-const bluebird = require("bluebird");
+import * as redis from "redis";
+import * as bluebird from "bluebird";
 
 export const createRedisClient = async ({ redisURL }: { redisURL: string }) => {
   const client = redis.createClient({ url: redisURL });

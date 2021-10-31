@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
-import linkTool from "@roast-cms/link-tool";
+// import linkTool from "@roast-cms/link-tool";
+import linkTool from "./tool/index";
 
 dotenv.config();
 

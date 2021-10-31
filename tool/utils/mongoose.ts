@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const cachegoose = require("cachegoose");
+import * as mongoose from "mongoose";
+import * as cachegoose from "cachegoose";
 
 const connectMongoose = ({
   databaseURI,

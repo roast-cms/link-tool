@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "es2020",
     "pretty": true,
     "target": "es5",
-    "resolveJsonModule": true
+    "moduleResolution": "node"
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", ".git", ".md"]

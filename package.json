@@ -1,18 +1,18 @@
 {
   "name": "@roast-cms/link-tool",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Node.js API for managing affiliate links.",
   "main": "tool/index.js",
   "repository": "https://github.com/roast-cms/link-tool.git",
   "author": "dmitrizzle <8587882+dmitrizzle@users.noreply.github.com>",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "start": "ts-node ./server.ts",
-    "dev": "tsc-watch --onSuccess \"ts-node ./server.ts\"",
+    "dev": "tsc-watch --onSuccess \"ts-node ./example-server\"",
     "lint": "eslint \"./**/*.ts\"",
     "lint:fix": "eslint --fix \"./**/*.ts\"",
     "test:unit": "jest",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
-    "@roast-cms/link-tool": "^0.0.3",
+    "@roast-cms/link-tool": "^0.0.4",
     "@types/bluebird": "^3.5.36",
     "@types/body-parser": "^1.19.0",
     "@types/connect-redis": "^0.0.17",
