@@ -1,5 +1,4 @@
 import * as mongoose from "mongoose";
-import * as cachegoose from "cachegoose";
 
 const connectMongoose = ({
   databaseURI,
@@ -8,17 +7,16 @@ const connectMongoose = ({
   databaseURI: string;
   redisURL: string;
 }) => {
+  const cachegoose = require("cachegoose");
   try {
-    (async () => {
-      const { createRedisClient } = require("./redis");
-      const redis = await createRedisClient({ redisURL });
-      cachegoose(mongoose, {
-        engine: "redis",
-        port: redis.options.port,
-        host: redis.options.host,
-        password: redis.options.password,
-      });
-    })();
+    const { createRedisClient } = require("./redis");
+    const redis = createRedisClient({ redisURL });
+    cachegoose(mongoose, {
+      engine: "redis",
+      port: redis.options.port,
+      host: redis.options.host,
+      password: redis.options.password,
+    });
   } catch (error) {
     console.log(
       "Failed to connect `cachegoose` to Redis. Using local memory instead: ",

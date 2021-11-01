@@ -10,6 +10,7 @@ const linkSchema = new Schema({
       url: String,
       locale: String,
       value: Number,
+      name: String,
     },
   ],
 });

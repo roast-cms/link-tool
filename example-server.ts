@@ -24,7 +24,7 @@ app.use(
     applicationSecret: process.env.APPLICATION_SECRET || "",
 
     // OPTIONAL path name for the `links` API on local Express router
-    pathName: "/recommends",
+    pathName: "/link",
   })
 );
 

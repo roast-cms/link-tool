@@ -43,7 +43,7 @@ const tool = ({
   );
 
   return expressApp.get(
-    `${pathName || "/recommends"}/:link`,
+    `${pathName || "/link"}/:link`,
     async (req: Request, res: Response) => {
       // query
       const linkID = req.params.link;
@@ -52,6 +52,7 @@ const tool = ({
         redisURL,
       })
         .findOne({ link: linkID })
+        .cache(60 * 10) // cache links for 10 min
         .exec();
 
       // document not found
@@ -64,7 +65,7 @@ const tool = ({
       const doc = Object.assign({}, dbDocument._doc);
 
       /**
-        Sorts vendors based on value you assign to them.
+        Sorts vendors based on value you assign to them & pics top-valued one.
       */
       const topValuedVendor = doc.vendors.sort(
         (firstVendor: number, secondVendor: number) => {
@@ -81,6 +82,7 @@ const tool = ({
         vendor: {
           url: topValuedVendor.url,
           locale: topValuedVendor.locale,
+          name: topValuedVendor.name,
           // you may not want to share the vale you place on various vendors
         },
       });
