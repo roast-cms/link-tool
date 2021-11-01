@@ -58,7 +58,8 @@ For this example to work, MongoDB collection `links` should have the following d
     {
       "url": "https://shop.com/us/widget?referral=you",
       "value": 1,
-      "locale": "us"
+      "locale": "us",
+      "name": "eBay"
     }
   ]
 }
@@ -82,7 +83,7 @@ export const MyPage = () => {
     try {
       const linkResponse = await fetch("/recommends/widget?locale=us");
       const linkResponseJson = await linkResponse.json();
-      setMyLink(linkResponseJson.link);
+      setMyLink(linkResponseJson.vendor.url);
     } catch(error) {
       console.log(error);
     }
