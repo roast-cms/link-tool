@@ -1,8 +1,7 @@
 import * as express from "express";
-import * as dotenv from "dotenv";
 import links from "./src";
 
-dotenv.config();
+require("dotenv").config();
 
 /**
   Parent Express application.

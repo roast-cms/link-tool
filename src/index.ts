@@ -7,6 +7,8 @@ import * as connectRedis from "connect-redis";
 import Links from "./models/links";
 import { Request, Response } from "express";
 
+require("dotenv").config();
+
 /**
   Returns Express router middleware.
 */

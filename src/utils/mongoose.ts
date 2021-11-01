@@ -1,9 +1,10 @@
 import * as mongoose from "mongoose";
 
+require("dotenv").config();
 const databaseURI = process.env.DATABASE_URI || "";
 const cachegoose = require("cachegoose");
 try {
-  const client = require("./redis");
+  const client = require("./redis").default;
   cachegoose(mongoose, {
     engine: "redis",
     port: client.options.port,
