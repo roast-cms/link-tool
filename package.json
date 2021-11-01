@@ -1,6 +1,6 @@
 {
   "name": "@roast-cms/links",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Node.js API for managing affiliate links.",
   "main": "dist/index.js",
   "repository": "https://github.com/roast-cms/links.git",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
-    "@roast-cms/links": "^0.1.0",
+    "@roast-cms/links": "^0.2.0",
     "@types/bluebird": "^3.5.36",
     "@types/body-parser": "^1.19.0",
     "@types/connect-redis": "^0.0.17",
