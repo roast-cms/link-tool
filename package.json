@@ -24,6 +24,7 @@
     "bluebird": "^3.7.2",
     "cachegoose": "^8.0.0",
     "connect-redis": "^6.0.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "jest": "^27.3.1",
@@ -35,7 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
-    "@roast-cms/links": "^0.2.0",
+    "@roast-cms/links": "^0.2.1",
     "@types/bluebird": "^3.5.36",
     "@types/body-parser": "^1.19.0",
     "@types/connect-redis": "^0.0.17",
@@ -46,7 +47,6 @@
     "@types/redis": "^2.8.32",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
-    "dotenv": "^10.0.0",
     "eslint": "^8.1.0",
     "husky": "^7.0.4",
     "tsc-watch": "^4.2.9"
