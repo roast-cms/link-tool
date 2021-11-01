@@ -1223,14 +1223,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@roast-cms/links@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@roast-cms/links/-/links-0.2.0.tgz#09afe3dbeeed9b5429636928214556764df3e1c6"
-  integrity sha512-Pd53yxb4GwBI5G06lvRj46GIdeMbW+TU7bU+ztVHokMYiG50T4bjHtiOtyMz4l2sQaj/0/AdHETTF4X/hSeXXg==
+"@roast-cms/links@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@roast-cms/links/-/links-0.2.1.tgz#c2fe190ed3bf9ea4c0423a7c2ede7ca2a45d3418"
+  integrity sha512-Jps+26IgS6lQYypehIgqyQv5aCk5dzku+sN12ff2PV40ihhIvlY0cX3r+KLeiI/0i5I591ZAumlYXsBKTbBYCA==
   dependencies:
     bluebird "^3.7.2"
     cachegoose "^8.0.0"
     connect-redis "^6.0.0"
+    dotenv "^10.0.0"
     express "^4.17.1"
     express-session "^1.17.2"
     jest "^27.3.1"
