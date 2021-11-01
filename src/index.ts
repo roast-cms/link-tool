@@ -10,21 +10,15 @@ import { Request, Response } from "express";
 /**
   Returns Express router middleware.
 */
-const tool = ({
-  pathName,
-  redisURL,
-  databaseURI,
-  applicationSecret,
-}: {
-  pathName: string | undefined;
-  redisURL: string;
-  databaseURI: string;
-  applicationSecret: string;
-}) => {
+const tool = ({ pathName }: { pathName: string | undefined }) => {
+  const redisURL = process.env.REDIS_URL;
+  const databaseURI = process.env.DATABASE_URI;
+  const applicationSecret = process.env.APPLICATION_SECRET;
+
   if (!redisURL || !databaseURI || !applicationSecret)
     throw {
       error:
-        "Required `redisURL`, `databaseURI`, or `applicationSecret` missing.",
+        "Required `redisURL`, `databaseURI`, or `applicationSecret` missing from `.env` file.",
     };
 
   // set up Redis connection.
@@ -47,11 +41,7 @@ const tool = ({
     async (req: Request, res: Response) => {
       // query
       const linkID = req.params.link;
-      const dbDocument = await Links({
-        databaseURI,
-        redisURL,
-      })
-        .findOne({ link: linkID })
+      const dbDocument = await Links.findOne({ link: linkID })
         .cache(60 * 10) // cache links for 10 min
         .exec();
 

@@ -14,15 +14,6 @@ const app = express();
 */
 app.use(
   links({
-    // REQUIRED redis server URL
-    redisURL: process.env.REDIS_URL || "",
-
-    // REQUIRED MongoDB URI
-    databaseURI: process.env.DATABASE_URI || "",
-
-    // REQUIRED application secret (random string for app session ID)
-    applicationSecret: process.env.APPLICATION_SECRET || "",
-
     // OPTIONAL path name for the API on local Express router
     pathName: "/link", // this is the default path to API
   })

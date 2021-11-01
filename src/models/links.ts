@@ -15,16 +15,6 @@ const linkSchema = new Schema({
   ],
 });
 
-const Links = ({
-  databaseURI,
-  redisURL,
-}: {
-  databaseURI: string;
-  redisURL: string;
-}) =>
-  connection({
-    databaseURI,
-    redisURL,
-  }).model("Link", linkSchema);
+const Links = connection.model("Link", linkSchema);
 
 export default Links;

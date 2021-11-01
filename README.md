@@ -22,15 +22,6 @@ import links from "@roast-cms/links";
 
 app.use(
   links({
-    // REQUIRED redis server URL
-    redisURL: process.env.REDIS_URL || "",
-
-    // REQUIRED MongoDB URI
-    databaseURI: process.env.DATABASE_URI || "",
-
-    // REQUIRED application secret (random string for app session ID)
-    applicationSecret: process.env.APPLICATION_SECRET || "",
-
     // OPTIONAL path name for the `links` API on local Express router
     pathName: "/recommends",
   })
