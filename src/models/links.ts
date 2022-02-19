@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const linkSchema = new Schema({
   link: String,
+  tags: Array,
   vendors: [
     {
       url: String,

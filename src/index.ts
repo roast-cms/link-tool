@@ -43,9 +43,26 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
     async (req: Request, res: Response) => {
       // query
       const linkID = req.params.link;
-      const dbDocument = await Links.findOne({ link: linkID })
-        .cache(60 * 10) // cache links for 10 min
-        .exec();
+      const linkTag = req.query.tag;
+      const isGroupRequest = linkTag && linkID === "group";
+      const dbDocument = isGroupRequest
+        ? await Links.find({ tags: { $in: [linkTag] } })
+        : await Links.findOne({ link: linkID })
+            .cache(60 * 10) // cache links for 10 min
+            .exec();
+
+      // group/list of links with a particular tag
+      if (isGroupRequest && dbDocument.length) {
+        return res.json({
+          status: 200,
+          tag: linkTag,
+          group: dbDocument.map(({ vendors, link, tags }) => ({
+            vendors,
+            link,
+            tags,
+          })),
+        });
+      }
 
       // document not found
       if (!dbDocument || !dbDocument._doc)
