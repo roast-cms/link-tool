@@ -11,6 +11,7 @@
     "node": "14.x"
   },
   "scripts": {
+    "audit:fix": "npx yarn-audit-fix",
     "build": "rm -rf dist && tsc",
     "dev": "tsc-watch --onSuccess \"ts-node ./dev-server\"",
     "dev:example": "tsc-watch --onSuccess \"ts-node ./example-server\"",
