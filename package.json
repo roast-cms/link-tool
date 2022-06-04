@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": "14.x"
+    "node": ">=16.x || 14.x"
   },
   "scripts": {
     "audit:fix": "npx yarn-audit-fix",
