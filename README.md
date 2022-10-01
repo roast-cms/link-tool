@@ -36,7 +36,12 @@ Complete example can be found in `./example-server.ts` and can be run with `yarn
 
 ```json
 {
-  "link": "https://shop.com/us/widget?referral=you"
+  "link": "widget",
+  "status": 200,
+  "vendor": {
+    "name": "eBay",
+    "url": "https://ebay.com/us/widget?referral=you"
+  }
 }
 ```
 
