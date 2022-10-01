@@ -32,7 +32,7 @@ Complete example can be found in `./example-server.ts` and can be run with `yarn
 
 ## API:
 
-#### GET `/recommends/widget?locale=us`
+#### GET `/recommends/widget`
 
 ```json
 {
@@ -55,6 +55,15 @@ For this example to work, MongoDB collection `links` should have the following d
   ]
 }
 ```
+
+##### Parameters:
+
+- `locale` - Not implemented but planned. Would prioritize local vendors.
+- `vendors` - Select vendor groups. Currently implemented: `"ALL"`, which lists all vendors for the link.
+
+#### GET `/recommends/group?tag=cameras`
+
+Returns all links for a given `tag` param.
 
 ## Usage (with React):
 
