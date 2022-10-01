@@ -44,14 +44,17 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       // query
       const linkID = req.params.link;
       const linkTag = req.query.tag;
+      const linkVendors = req.query.vendors;
+
+      /**
+        Group/list of links with a particular tag.
+      */
       const isGroupRequest = linkTag && linkID === "group";
       const dbDocument = isGroupRequest
         ? await Links.find({ tags: { $in: [linkTag] } })
         : await Links.findOne({ link: linkID })
             .cache(60 * 10) // cache links for 10 min
             .exec();
-
-      // group/list of links with a particular tag
       if (isGroupRequest && dbDocument.length) {
         return res.json({
           status: 200,
@@ -74,6 +77,22 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       const doc = Object.assign({}, dbDocument._doc);
 
       /**
+        Shows all vendors.
+      */
+      if (linkVendors === "all")
+        return res.json({
+          status: 200,
+          link: doc.link,
+          tags: doc.tags,
+          vendors: doc.vendors?.map(({ name, url, value, locale }) => ({
+            name,
+            url,
+            value,
+            locale,
+          })),
+        });
+
+      /**
         Sorts vendors based on value you assign to them & pics top-valued one.
       */
       const topValuedVendor = doc.vendors.sort(
@@ -84,6 +103,13 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
         }
       )[0];
 
+      /**
+        TODO:
+        Add a condition where if the locale is specified, and it exists
+        in the list of vendors, matching results get bumped above other vendors
+        in the list.
+      */
+
       // successful API response
       return res.json({
         status: 200,
@@ -92,6 +118,7 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
           url: topValuedVendor.url,
           locale: topValuedVendor.locale,
           name: topValuedVendor.name,
+          tags: topValuedVendor.tags,
           // you may not want to share the vale you place on various vendors
         },
       });
