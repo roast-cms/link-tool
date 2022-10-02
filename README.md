@@ -70,6 +70,10 @@ For this example to work, MongoDB collection `links` should have the following d
 
 Returns all links for a given `tag` param.
 
+#### GET `/recommends/bulk?links=widget,toy,fancy-garmet`
+
+Returns all links (including all vendors) from array inferred from `links` param (uses `array.split(",")`).
+
 ## Usage (with React):
 
 This an example using React framework, however, the idea would be the same in any kind of project (both on server and on the browser):

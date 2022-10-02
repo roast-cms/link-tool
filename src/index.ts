@@ -45,6 +45,53 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       const linkID = req.params.link;
       const linkTag = req.query.tag;
       const linkVendors = req.query.vendors;
+      const bulkLinkList = req.query.links;
+
+      /**
+        Bulk request for multiple link IDs.
+      */
+      if (linkID === "bulk" && bulkLinkList) {
+        const linkIDs: string[] = bulkLinkList.split(",");
+        if (!linkIDs.length)
+          return res.json({
+            status: 500,
+            message: "No link IDs found.",
+          });
+
+        let status = 200;
+        let message = undefined;
+
+        if (linkIDs.length > 10) {
+          status = 206;
+          message = "Trimmed link ID list to the maximum of 10.";
+          linkIDs = arr.slice(0, 10);
+        }
+
+        const dbDocuments =
+          (await Links.find(
+            {
+              link: { $in: linkIDs },
+            },
+            { _id: 0 } // remove _id keys for the first level
+          )
+            .cache(60 * 10) // cache links for 10 min
+            .exec()) || [];
+
+        return res.json({
+          status,
+          message,
+          group: dbDocuments.map(({ vendors, link, tags }) => ({
+            link,
+            vendors: (vendors || []).map(({ name, url, value }) => ({
+              // explicitly define return keys
+              name,
+              url,
+              value,
+            })),
+            tags,
+          })),
+        });
+      }
 
       /**
         Group/list of links with a particular tag.
@@ -52,6 +99,8 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       const isGroupRequest = linkTag && linkID === "group";
       const dbDocument = isGroupRequest
         ? await Links.find({ tags: { $in: [linkTag] } })
+            .cache(60 * 10) // cache links for 10 min
+            .exec()
         : await Links.findOne({ link: linkID })
             .cache(60 * 10) // cache links for 10 min
             .exec();
