@@ -80,8 +80,9 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
         return res.json({
           status,
           message,
-          group: dbDocuments.map(({ vendors, link, tags }) => ({
+          group: dbDocuments.map(({ vendors, link, tags, title }) => ({
             link,
+            title,
             vendors: (vendors || []).map(({ name, url, value }) => ({
               // explicitly define return keys
               name,
@@ -108,9 +109,10 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
         return res.json({
           status: 200,
           tag: linkTag,
-          group: dbDocument.map(({ vendors, link, tags }) => ({
-            vendors,
+          group: dbDocument.map(({ vendors, link, tags, title }) => ({
+            title,
             link,
+            vendors,
             tags,
           })),
         });
@@ -132,13 +134,14 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
         return res.json({
           status: 200,
           link: doc.link,
-          tags: doc.tags,
+          title: doc.title,
           vendors: doc.vendors?.map(({ name, url, value, locale }) => ({
             name,
             url,
             value,
             locale,
           })),
+          tags: doc.tags,
         });
 
       /**
@@ -163,6 +166,7 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       return res.json({
         status: 200,
         link: doc.link,
+        title: doc.title,
         vendor: {
           url: topValuedVendor.url,
           locale: topValuedVendor.locale,
