@@ -72,7 +72,7 @@ Returns all links for a given `tag` param.
 
 #### GET `/recommends/bulk?links=widget,toy,fancy-garmet`
 
-Returns all links (including all vendors) from array inferred from `links` param (uses `array.split(",")`).
+Returns all links (including all vendors) from array inferred from `links` param (uses `array.split(",")`). Limit of 10.
 
 ## Usage (with React):
 
