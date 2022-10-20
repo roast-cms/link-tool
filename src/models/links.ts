@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const linkSchema = new Schema({
   link: String,
   tags: Array,
+  title: String,
   vendors: [
     {
       url: String,
