@@ -199,6 +199,21 @@ const links = ({
       // query
       const linkID = req.params.link;
 
+      // authenticate
+      if (req.user?.role !== "admin") {
+        return res.status(401).json({ status: 401 });
+      }
+
+      const dbDocument = await Links.findOne({ link: linkID })
+        .cache(60 * 10) // cache links for 10 min
+        .exec();
+
+      // document not found
+      if (!dbDocument || !dbDocument._doc)
+        return res.status(404).json({
+          status: 404,
+        });
+
       return res.json({ status: 200, link: linkID });
     }
   );

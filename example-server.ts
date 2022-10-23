@@ -12,12 +12,9 @@ const app = express();
 /**
   Example authentication middleware for authenticated routes (DELETE, PUT)
 */
-const authenticationMiddleware = (
-  _req: Request,
-  _res: Response,
-  next: Function
-) => {
+const authenticationMiddleware = (req: any, _res: Response, next: Function) => {
   // everyone's authenticated (UNSAFE, EXAMPLE USE ONLY)
+  req.user = { role: "admin" };
   next();
 };
 
@@ -39,7 +36,7 @@ app.use(
     pathName: "/link", // this is the default path to API
 
     // OPTIONAL authentication middleware to secure endpoints that allowe link edits
-    authenticationMiddleware,
+    authenticationMiddleware, // NOTE: middleware must assign `user.role: "admin"`
   })
 );
 
