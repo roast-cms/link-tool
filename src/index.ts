@@ -12,11 +12,19 @@ require("dotenv").config();
 /**
   Returns Express router middleware.
 */
-const tool = ({ pathName }: { pathName: string | undefined }) => {
-  const redisURL = process.env.REDIS_URL;
-  const databaseURI = process.env.DATABASE_URI;
-  const applicationSecret = process.env.APPLICATION_SECRET;
-
+const links = ({
+  pathName,
+  redisURL,
+  databaseURI,
+  applicationSecret,
+  authenticationMiddleware,
+}: {
+  pathName?: string;
+  redisURL: string;
+  databaseURI: string;
+  applicationSecret?: string;
+  authenticationMiddleware?: Function;
+}) => {
   if (!redisURL || !databaseURI || !applicationSecret)
     throw {
       error:
@@ -24,12 +32,12 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
     };
 
   // set up Redis connection.
-  const expressApp = express();
+  const linksApp = express();
   const RedisStore = connectRedis(session);
   const redisClient = redis.createClient({
     url: redisURL,
   });
-  expressApp.use(
+  linksApp.use(
     session({
       store: new RedisStore({ client: redisClient }),
       secret: applicationSecret,
@@ -38,7 +46,10 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
     })
   );
 
-  return expressApp.get(
+  /**
+    Public endpoints.
+  */
+  linksApp.get(
     `${pathName || "/link"}/:link`,
     async (req: Request, res: Response) => {
       // query
@@ -177,6 +188,22 @@ const tool = ({ pathName }: { pathName: string | undefined }) => {
       });
     }
   );
+
+  /**
+    Autenticated endpoints.
+  */
+  linksApp.delete(
+    `${pathName || "/link"}/:link`,
+    authenticationMiddleware ? authenticationMiddleware : () => {},
+    async (req: Request, res: Response) => {
+      // query
+      const linkID = req.params.link;
+
+      return res.json({ status: 200, link: linkID });
+    }
+  );
+
+  return linksApp;
 };
 
-export default tool;
+export default links;
