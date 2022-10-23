@@ -103,9 +103,11 @@ export const MyPage = () => {
 }
 ```
 
+_See example for authenticated implementation with an option to edit and archive links_
+
 ## To Do:
 
 - [x] Initialize project in Node.js with Mongoose (MongoDB)
 - [x] TypeScript and Jest
 - [ ] Add locale selection logic
-- [ ] Allow link disabling/archiving
+- [x] Allow link disabling/archiving
