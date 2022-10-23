@@ -4,6 +4,7 @@ import connection from "../utils/mongoose";
 const Schema = mongoose.Schema;
 
 const linkSchema = new Schema({
+  archived: Boolean,
   link: String,
   tags: Array,
   title: String,

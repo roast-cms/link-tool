@@ -110,7 +110,10 @@ const links = ({
       */
       const isGroupRequest = linkTag && linkID === "group";
       const dbDocument = isGroupRequest
-        ? await Links.find({ tags: { $in: [linkTag] } })
+        ? await Links.find({
+            tags: { $in: [linkTag] },
+            archived: { $in: [null, false] },
+          })
             .cache(60 * 10) // cache links for 10 min
             .exec()
         : await Links.findOne({ link: linkID })
@@ -214,7 +217,14 @@ const links = ({
           status: 404,
         });
 
-      return res.json({ status: 200, link: linkID });
+      // set status to "archived" - DOES NOT DELETE FROM DB
+      dbDocument.archived = true;
+      dbDocument.save();
+
+      // unwraps the response
+      const doc = Object.assign({}, dbDocument._doc);
+
+      return res.json({ status: 200, ...doc });
     }
   );
 
