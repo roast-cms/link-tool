@@ -47,7 +47,7 @@ const links = ({
   );
 
   /**
-    Public endpoints.
+    PUBLIC: GET list of links or a single link.
   */
   linksApp.get(
     `${pathName || "/link"}/:link`,
@@ -112,11 +112,15 @@ const links = ({
       const dbDocument = isGroupRequest
         ? await Links.find({
             tags: { $in: [linkTag] },
+            // filter out archived links
             archived: { $in: [null, false] },
           })
             .cache(60 * 10) // cache links for 10 min
             .exec()
-        : await Links.findOne({ link: linkID })
+        : await Links.findOne({
+            link: linkID,
+            archived: { $in: [null, false] },
+          })
             .cache(60 * 10) // cache links for 10 min
             .exec();
       if (isGroupRequest && dbDocument.length) {
@@ -193,7 +197,7 @@ const links = ({
   );
 
   /**
-    Autenticated endpoints.
+    AUTHENTICATED: archive a single link entry.
   */
   linksApp.delete(
     `${pathName || "/link"}/:link`,
@@ -219,6 +223,56 @@ const links = ({
 
       // set status to "archived" - DOES NOT DELETE FROM DB
       dbDocument.archived = true;
+      dbDocument.save();
+
+      // unwraps the response
+      const doc = Object.assign({}, dbDocument._doc);
+
+      return res.json({ status: 200, ...doc });
+    }
+  );
+
+  /**
+    AUTHENTICATED: edit a single link entry.
+  */
+  linksApp.put(
+    `${pathName || "/link"}/:link`,
+    authenticationMiddleware ? authenticationMiddleware : () => {},
+    async (req: Request, res: Response) => {
+      // query
+      const linkID = req.params.link;
+      const tags = req.body?.tags;
+      const title = req.body?.title;
+      const vendors = req.body?.vendors;
+
+      console.log("req.body", req.body);
+
+      // authenticate
+      if (req.user?.role !== "admin") {
+        return res.status(401).json({ status: 401 });
+      }
+
+      // discard invalid requests
+      if (!tags && !title && !vendors)
+        return res.status(400).json({ status: 400 });
+
+      const dbDocument = await Links.findOne({ link: linkID })
+        .cache(60 * 10) // cache links for 10 min
+        .exec();
+
+      // document not found
+      if (!dbDocument || !dbDocument._doc)
+        return res.status(404).json({
+          status: 404,
+        });
+
+      // edit pieces of the document individually
+      dbDocument.tags =
+        typeof tags !== "undefined" ? tags : dbDocument.tags || [];
+      dbDocument.title =
+        typeof title !== "undefined" ? title : dbDocument.title || "";
+      dbDocument.vendors =
+        typeof vendors !== "undefined" ? vendors : dbDocument.vendors || [];
       dbDocument.save();
 
       // unwraps the response

@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as bodyParser from "body-parser";
 // import links from "@roast-cms/links";
 
 const links = require("./src").default;
@@ -8,6 +9,7 @@ require("dotenv").config();
   Parent Express application.
 */
 const app = express();
+app.use(bodyParser.json()); // need this to read PUT requests
 
 /**
   Example authentication middleware for authenticated routes (DELETE, PUT)
