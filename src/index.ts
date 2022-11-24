@@ -267,6 +267,7 @@ const links = ({
             title,
             vendros,
           };
+          console.log("newLinkData", newLinkData);
           const newLink = new Links(newLinkData);
           await newLink.save();
           return res.json({ status: 200, ...newLinkData });
