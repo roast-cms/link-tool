@@ -245,8 +245,6 @@ const links = ({
       const title = req.body?.title;
       const vendors = req.body?.vendors;
 
-      console.log("req.body", req.body);
-
       // authenticate
       if (req.user?.role !== "admin") {
         return res.status(401).json({ status: 401 });
@@ -261,10 +259,20 @@ const links = ({
         .exec();
 
       // document not found
-      if (!dbDocument || !dbDocument._doc)
-        return res.status(404).json({
-          status: 404,
-        });
+      if (!dbDocument || !dbDocument._doc) {
+        try {
+          const newLinkData = {
+            tags: tags !== "undefined" ? tags : [],
+            title: title !== "undefined" ? title : "",
+            vendros: vendors !== "undefined" ? vendors : [],
+          };
+          const newLink = new Links(newLinkData);
+          await newLink.save();
+          return res.json({ status: 200, ...newLinkData });
+        } catch (error) {
+          return res.json({ status: 500 });
+        }
+      }
 
       // edit pieces of the document individually
       dbDocument.tags =
