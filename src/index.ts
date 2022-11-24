@@ -262,9 +262,10 @@ const links = ({
       if (!dbDocument || !dbDocument._doc) {
         try {
           const newLinkData = {
-            tags: tags !== "undefined" ? tags : [],
-            title: title !== "undefined" ? title : "",
-            vendros: vendors !== "undefined" ? vendors : [],
+            link: linkID,
+            tags,
+            title,
+            vendros,
           };
           const newLink = new Links(newLinkData);
           await newLink.save();
