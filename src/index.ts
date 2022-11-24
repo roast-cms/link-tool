@@ -263,16 +263,19 @@ const links = ({
         try {
           const newLinkData = {
             link: linkID,
-            tags,
-            title,
-            vendros,
+            tags: typeof tags !== "undefined" ? tags : dbDocument.tags || [],
+            title:
+              typeof title !== "undefined" ? title : dbDocument.title || "",
+            vendros:
+              typeof vendors !== "undefined"
+                ? vendors
+                : dbDocument.vendors || [],
           };
-          console.log("newLinkData", newLinkData);
           const newLink = new Links(newLinkData);
           await newLink.save();
           return res.json({ status: 200, ...newLinkData });
         } catch (error) {
-          return res.json({ status: 500, error });
+          return res.json({ status: 500 });
         }
       }
 
