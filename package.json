@@ -1,6 +1,6 @@
 {
   "name": "@roast-cms/links",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "A Node.js API for managing affiliate links.",
   "main": "dist/index.js",
   "repository": "https://github.com/roast-cms/links.git",
