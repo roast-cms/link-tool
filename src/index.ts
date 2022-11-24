@@ -271,7 +271,7 @@ const links = ({
           await newLink.save();
           return res.json({ status: 200, ...newLinkData });
         } catch (error) {
-          return res.json({ status: 500 });
+          return res.json({ status: 500, error });
         }
       }
 
