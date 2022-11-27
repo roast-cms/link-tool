@@ -266,7 +266,7 @@ const links = ({
             tags: typeof tags !== "undefined" ? tags : dbDocument.tags || [],
             title:
               typeof title !== "undefined" ? title : dbDocument.title || "",
-            vendros:
+            vendors:
               typeof vendors !== "undefined"
                 ? vendors
                 : dbDocument.vendors || [],
